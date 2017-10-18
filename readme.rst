@@ -13,8 +13,8 @@ On Linux
 Tested on Linux Mint 18.2
 
 
-Preparing the environment
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Preparing the environment for LUFA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. ``sudo apt-get install gcc-avr binutils-avr avr-libc dfu-programmer``
 #. ``git clone git@github.com:abcminiuser/lufa.git``
@@ -33,6 +33,13 @@ Building
 
 The path of minimum resistance is to do this within the ``LUFA`` directory structure, after cloning the repository. Make a copy of the ``BulkVendor`` directory and do your changes there. Run ``make`` to produce new firmware.
 
+
+Building without LUFA
+~~~~~~~~~~~~~~~~~~~~~
+
+If USB-related functionality is not desired, a minimalist project can be taken from https://github.com/theRandomBit/trb-at90usb/blob/master/1.light.
+
+Assuming you've done the first step from the LUFA environment section, you'll be able to ``make`` this project and produce a firmware binary. It is the same as the one produced by ATMEL Studio, but without all the bells-and-whistles/overhead of the IDE for Windows.
 
 
 Deploying
