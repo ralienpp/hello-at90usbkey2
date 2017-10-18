@@ -48,3 +48,5 @@ References
 - http://www.ssalewski.de/AT90USB_firmware.html.en
 - http://www.avrfreaks.net/forum/at90usb-microcontroller-and-avr-studio-6-questions - practical tip on how to get started using ATMEL Studio for this particular type of board
 - http://www.fourwalledcubicle.com/files/LUFA/Doc/120219/html/_page__getting_started.html - LUFA, getting started
+- http://therandombit.blogspot.se/2009/08/hello-world-getting-started-with-atmel.html - another LUFA basic tutorial
+- https://github.com/theRandomBit/trb-at90usb - very basic projects related to the tutorials from the site above
