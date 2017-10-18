@@ -1,18 +1,16 @@
-/*
- * usbone.c
- *
- * Created: 10/18/2017 9:50:48 PM
- * Author : alex
- */ 
-
 #include <avr/io.h>
+#include <avr/wdt.h>
 
 
-int main(void)
-{
-    /* Replace with your application code */
-    while (1) 
-    {
-    }
+int main() {
+
+	MCUSR &= ~_BV(WDRF);
+	wdt_disable();
+
+	DDRD |= _BV(DDD4);
+	PORTD |= _BV(PD4);
+
+	while(1);
+
+	return 0;
 }
-
