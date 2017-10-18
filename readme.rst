@@ -7,6 +7,9 @@ Overview
 Howto
 =====
 
+#. Start ``ATMEL Studio``
+#. ``New\Project\GCC Executable``
+#. Select the board type using the filter, best guess = ``AT90USB1287``
 
 
 Building instructions
