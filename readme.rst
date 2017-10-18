@@ -31,7 +31,9 @@ As a result you get many ``.hex`` files to play with.
 Building
 ~~~~~~~~
 
-TODO
+The path of minimum resistance is to do this within the ``LUFA`` directory structure, after cloning the repository. Make a copy of the ``BulkVendor`` directory and do your changes there. Run ``make`` to produce new firmware.
+
+
 
 Deploying
 ~~~~~~~~~
@@ -46,6 +48,11 @@ Assuming you have a ``.hex`` file at hand, upload it to the board using the foll
 #. ``sudo dfu-programmer at90usb1287 reset``
 #. press ``RST``, this will reboot the board using the new firmware. Depending on the firmware, it may or may not show up in ``lsusb``, keep that in mind.
 
+
+Testing
+~~~~~~~
+
+For the ``BulkVendor`` demo, the USB package for Python ``sudo apt-get install python-usb`` then run ``python test_bulk_vendor.py`` (tested, but fails for now).
 
 
 
