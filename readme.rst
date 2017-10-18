@@ -17,11 +17,16 @@ Preparing the environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #. ``sudo apt-get install gcc-avr binutils-avr avr-libc dfu-programmer``
-#. ``wget http://www.github.com/abcminiuser/lufa/archive/LUFA-120219.zip``  Note that there are newer versions too, but the latest one, ``https://codeload.github.com/abcminiuser/lufa/zip/LUFA-170418``, did *not* compile successfully!
-#. Extract the archive somewhere and get into that directory, then
+#. ``git clone git@github.com:abcminiuser/lufa.git``
+#. ``cd lufa/Demos/Device`` then ``make`` to build the firmware samples. It will take a while.
 
-	- run ``make`` and wait until everything is compiled, it will take a while.
-	- ``cd Demos/Device`` and run ``make`` again; this will compile a lot of firmware samples, producing many ``.hex`` files to play with
+As a result you get many ``.hex`` files to play with.
+
+..NOTE::
+
+	I first tried it with ``wget http://www.github.com/abcminiuser/lufa/archive/LUFA-120219.zip``, running ``make`` inside this directory (after unzipping) successfully builds something else (not just the demos). But it is not yet clear whether this is relevant or not.
+
+
 
 Building
 ~~~~~~~~
