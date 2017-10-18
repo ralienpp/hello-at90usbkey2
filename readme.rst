@@ -18,22 +18,26 @@ The *endpoint configuration* and *transfer mode*.
 
 ::
 
-	+---------------+--------------+
-	|   Endpoint 0  |              |
-	|   (standard)  |  USB         |
-	+---------------+  device      |
-	                |              |
-	+---------------+              |
-	|   Endpoint 1  |              |
-	|   (read temp) |              |
-	+---------------+              |
-	                |              |
-	+---------------+              |
-	|   Endpoint 2  |              |
-	|   (LED ctrl)  |              |
-	+---------------+              |
-	                |              |
-	                +--------------+
+	+---------------+------------------------+
+	|   Endpoint 0  |                        |
+	|   (standard)  |  USB                   |
+	+---------------+  device                |
+	                |                        |
+	+---------------+      +---------------+ |
+	|   Endpoint 1  <------>   Temperature | |
+	|   (read temp) |      |     sensor    | |
+	+---------------+      +---------------+ |
+	                |                        |
+	+---------------+            +------+    |
+	|   Endpoint 2  +------------> LED1 |    |
+	|   (LED ctrl)  +-------+    |      |    |
+	+---------------+       |    +------+    |
+	                |       |                |
+	                |       |    +------+    |
+	                |       +----> LED2 |    |
+	                |            +------+    |
+	                +------------------------+
+
 
 
 +-------------+----------------------+-------------+----------------------------------------+
@@ -50,6 +54,8 @@ The *endpoint configuration* and *transfer mode*.
 | 2           | LED control          | Control     | Appropriate for commands issued every  |
 |             |                      |             | now and then.                          |
 +-------------+----------------------+-------------+----------------------------------------+
+
+Interrupt endpoints are not necessary for now, as there are no device-initiated actions. However, they may be added in the future.
 
 
 Howto
