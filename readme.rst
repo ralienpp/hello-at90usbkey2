@@ -22,7 +22,7 @@ Preparing the environment for LUFA
 
 As a result you get many ``.hex`` files to play with.
 
-..NOTE::
+.. NOTE::
 
 	I first tried it with ``wget http://www.github.com/abcminiuser/lufa/archive/LUFA-120219.zip``, running ``make`` inside this directory (after unzipping) successfully builds something else (not just the demos). But it is not yet clear whether this is relevant or not.
 
@@ -52,8 +52,11 @@ Assuming you have a ``.hex`` file at hand, upload it to the board using the foll
 #. run ``lsusb`` and ensure that it is listed as ``Bus 001 Device 008: ID 03eb:2ffb Atmel Corp. at90usb AVR DFU bootloader`` - if that is the case, you can upload the firmware itself
 #. ``sudo dfu-programmer at90usb1287 erase``
 #. ``sudo dfu-programmer at90usb1287 flash bin/usbone.hex`` - substitute the path to the firmware with the file you want to upload. ``usbone.hex`` was generated using ATMEL Studio, see the Windows approach below.
-#. ``sudo dfu-programmer at90usb1287 reset``
-#. press ``RST``, this will reboot the board using the new firmware. Depending on the firmware, it may or may not show up in ``lsusb``, keep that in mind.
+#. ``sudo dfu-programmer at90usb1287 reset`` to reset the device and make it load the new firmware.
+#. OR press ``RST`` on the board itself, to achieve the same effect.
+
+.. NOTE::
+	Depending on the firmware, it may or may not show up in ``lsusb``, keep that in mind.
 
 
 Testing
