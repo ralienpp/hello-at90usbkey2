@@ -131,7 +131,7 @@ On Windows, with ATMEL Studio
 
 #. Start ``ATMEL Studio``
 #. ``New\Project\GCC Executable``
-#. Select the board type using the filter, best guess = ``AT90USB1287``
+#. Select the board type using the filter, choose ``AT90USB1287``
 
 
 
@@ -143,9 +143,7 @@ First, you have to produce the binary itself:
 #. Hit ``F7`` to build it and
 #. Get the binary from ``usbone/Debug/usbone.hex`` - this is the resulting firmware
 
-Then it has to be uploaded onto the board:
-
-#. ``./dfu-programmer at90usb1287 get bootloader-version`` (doesn't work yet)
+Then it has to be uploaded onto the board. This was only done and successfully tested on Linux. The procedure should be the same, as long as ``dfu-programmer`` works.
 
 
 
