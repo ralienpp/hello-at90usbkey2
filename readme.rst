@@ -7,6 +7,41 @@ Overview
 Howto
 =====
 
+On Linux
+--------
+
+Tested on Linux Mint 18.2
+
+
+Preparing the environment
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. ``sudo apt-get install gcc-avr binutils-avr avr-libc dfu-programmer``
+#. ``wget http://www.github.com/abcminiuser/lufa/archive/LUFA-120219.zip``  Note that there are newer versions too, but the latest one, ``https://codeload.github.com/abcminiuser/lufa/zip/LUFA-170418``, did *not* compile successfully!
+#. Extract the archive somewhere and get into that directory, then run ``make`` and wait until everything is compiled, it will take a while.
+
+
+Building
+~~~~~~~~
+
+TODO
+
+Deploying
+~~~~~~~~~
+
+Assuming you have a ``.hex`` file at hand, upload it to the board using the following steps:
+
+#. press ``RST`` and ``HWB`` simultaneously on the board
+#. release ``RST`` then release ``HWB``
+#. run ``lsusb`` and ensure that it is listed as ``Bus 001 Device 008: ID 03eb:2ffb Atmel Corp. at90usb AVR DFU bootloader`` - if that is the case, you can upload the firmware itself
+#. ``sudo dfu-programmer at90usb1287 erase``
+#. ``sudo dfu-programmer at90usb1287 flash bin/usbone.hex`` - substitute the path to the firmware with the file you want to upload. ``usbone.hex`` was generated using ATMEL Studio, see the Windows approach below.
+#. ``sudo dfu-programmer at90usb1287 reset``
+#. press ``RST``, this will reboot the board using the new firmware. Depending on the firmware, it may or may not show up in ``lsusb``, keep that in mind.
+
+
+
+
 On Windows, with ATMEL Studio
 -----------------------------
 
