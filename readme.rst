@@ -54,3 +54,4 @@ References
 - http://www.fourwalledcubicle.com/files/LUFA/Doc/120219/html/_page__getting_started.html - LUFA, getting started
 - http://therandombit.blogspot.se/2009/08/hello-world-getting-started-with-atmel.html - another LUFA basic tutorial
 - https://github.com/theRandomBit/trb-at90usb - very basic projects related to the tutorials from the site above
+- http://www.technoburst.net/2013/04/atmel-dfu-programmer-tutorial-for-linux.html - ``dfu-programmer`` sample calls
