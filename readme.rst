@@ -36,6 +36,20 @@ The *endpoint configuration* and *transfer mode*.
 	                +--------------+
 
 
++-------------+----------------------+-------------+----------------------------------------+
+| Endpoint #  | Purpose              | Type        | Reasoning                              |
++=============+======================+=============+========================================+
+| 0           | Standard             |             | It has to be there by definition;it is |
+|             |                      |             | outside of scope.                      |
++-------------+----------------------+-------------+----------------------------------------+
+| 1           | Temperature readings | Isochronous | The payload is ``<1024 bytes`` and we  |
+|             |                      |             | don't care if every now and then a     |
+|             |                      |             | temperature reading is lost. (I see    |
+|             |                      |             | this as ``UDP``, at least for now).    |
++-------------+----------------------+-------------+----------------------------------------+
+| 2           | LED control          | Control     | Appropriate for commands issued every  |
+|             |                      |             | now and then.                          |
++-------------+----------------------+-------------+----------------------------------------+
 
 
 Howto
@@ -131,6 +145,8 @@ Then it has to be uploaded onto the board:
 
 Questions
 =========
+
+#. Is ``transfer`` the same as ``endpoint``?
 
 Dead ends
 ---------
