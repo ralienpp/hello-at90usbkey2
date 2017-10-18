@@ -24,7 +24,7 @@ The *endpoint configuration* and *transfer mode*.
 	+---------------+  device                |
 	                |                        |
 	+---------------+      +---------------+ |
-	|   Endpoint 1  <------>   Temperature | |
+	|   Endpoint 1  <------|   Temperature | |
 	|   (read temp) |      |     sensor    | |
 	+---------------+      +---------------+ |
 	                |                        |
