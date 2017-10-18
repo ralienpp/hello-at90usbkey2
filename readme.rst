@@ -1,6 +1,40 @@
 Overview
 ========
 
+Simple application for the AT90USBKEY2 board, it is meant to be a USB device with a custom set of commands, for subsequent use as target hardware for a Linux driver.
+
+
+Proposed features
+=================
+
+- read the temperature
+- control each of the 2 LEDs on the board
+
+
+Architecture
+------------
+
+The *endpoint configuration* and *transfer mode*.
+
+::
+
+	+---------------+--------------+
+	|   Endpoint 0  |              |
+	|   (standard)  |  USB         |
+	+---------------+  device      |
+	                |              |
+	+---------------+              |
+	|   Endpoint 1  |              |
+	|   (read temp) |              |
+	+---------------+              |
+	                |              |
+	+---------------+              |
+	|   Endpoint 2  |              |
+	|   (LED ctrl)  |              |
+	+---------------+              |
+	                |              |
+	                +--------------+
+
 
 
 
@@ -32,6 +66,12 @@ Building
 ~~~~~~~~
 
 The path of minimum resistance is to do this within the ``LUFA`` directory structure, after cloning the repository. Make a copy of the ``BulkVendor`` directory and do your changes there. Run ``make`` to produce new firmware.
+
+PID/VID for device identification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+These are defined in ``Descriptors.c``, line 57 and 58.
+
 
 
 Building without LUFA
@@ -114,3 +154,10 @@ References
 - http://therandombit.blogspot.se/2009/08/hello-world-getting-started-with-atmel.html - another LUFA basic tutorial
 - https://github.com/theRandomBit/trb-at90usb - very basic projects related to the tutorials from the site above
 - http://www.technoburst.net/2013/04/atmel-dfu-programmer-tutorial-for-linux.html - ``dfu-programmer`` sample calls
+
+
+
+Other remarks
+=============
+
+- Data on the USBus is transmitted LSB first.
