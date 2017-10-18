@@ -14,7 +14,8 @@ Proposed features
 Architecture
 ------------
 
-The *endpoint configuration* and *transfer mode*.
+The device operates in a single *configuration*, that exposes two *interfaces*, one for the temperature sensor and one for the LEDs (both of them). Note that it is also technically possible to have each of the LEDs assigned to a separate endpoint, and have a common interface for them. However, at this stage it seems that there would be no benefits to that, so we take the approach that involves juggling with fewer entities (i.e. 2 interfaces and 2 endpoints vs 2 interfaces and 3 endpoints).
+
 
 ::
 
@@ -55,7 +56,7 @@ The *endpoint configuration* and *transfer mode*.
 |             |                      |             | now and then.                          |
 +-------------+----------------------+-------------+----------------------------------------+
 
-Interrupt endpoints are not necessary for now, as there are no device-initiated actions. However, they may be added in the future.
+*Interrupt* and *bulk* endpoints are not necessary for now, as there are no device-initiated actions, nor large data transfers. However, they may be added in the future.
 
 
 Howto
@@ -151,6 +152,8 @@ Questions
 =========
 
 #. Is ``transfer`` the same as ``endpoint``?
+#. "When a device is enumerated, the host reads the device descriptors and can make a decision of which configuration to enable. It can only enable one configuration at a time." Should one then map all features to a single endpoint? Or is it irrelevant, because we can put them all under different *interface descriptors*, of which more than 1 can be active at once.
+#. Why disable the watchdog? What does the watchdog watch? (line 77 in the BulkVendor sample)
 
 Dead ends
 ---------
