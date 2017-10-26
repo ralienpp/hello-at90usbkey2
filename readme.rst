@@ -30,8 +30,8 @@ The device operates in a single *configuration*, that exposes two *interfaces*, 
 	+---------------+      +---------------+ |
 	                |                        |
 	+---------------+            +------+    |
-	|   Endpoint 2  +------------> LED1 |    |
-	|   (LED ctrl)  +-------+    |      |    |
+	|   Endpoint 2  <------------> LED1 |    |
+	|   (LED ctrl)  <-------+    |      |    |
 	+---------------+       |    +------+    |
 	                |       |                |
 	                |       |    +------+    |
