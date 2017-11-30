@@ -230,6 +230,7 @@ The next phase is to build the kernel from source. These instructions are derive
 #. Press ``F6`` to save the configuration (leave the default name as ``.config``)
 #. ``make clean``
 #. ``make -j8 deb-pkg`` - this initiates the kernel build process, it will take a long time. As a result you'll get a ``.deb`` that can be installed. Note the ``-j8`` parameter, it indicates that the build process is done by 8 processes in parallel, adjust this as you see fit, depending on your hardware capabilities (this should speed up the process a bit). The value could be chosen as the number of cores times ``1.5``; you can play with it and see empirically what works best for you.
+#. ``dpkg -i <name of output>.deb`` to install the freshly built kernel
 
 
 
