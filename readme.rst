@@ -225,7 +225,7 @@ The next phase is to build the kernel from source. These instructions are derive
 #. ``apt-get source linux``
 #. ``apt-get install devscripts``
 #. ``make nconfig``
-#. In ``kernel hacking`` enable these: ``KGDB, debug boot parameters``. Note that building the kernel with debug symbols is also required, but this option is enabled by default in _Compiler settings\compile time checks and compiler options_
+#. In ``kernel hacking`` enable these: ``KGDB, debug boot parameters``. Note that building the kernel with debug symbols is also required, but this option is enabled by default in *Compiler settings\compile time checks and compiler options*
 #. Press ``F6`` to save the configuration (leave the default name as ``.config``)
 #. ``make clean``
 #. ``make deb-pkg`` - this initiates the kernel build process, it will take a long time. As a result you'll get a ``.deb`` that can be installed
