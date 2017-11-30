@@ -236,7 +236,11 @@ Host
 ~~~~
 
 #. Install the following packages, e.g. ``sudo apt-get install socat``
-#. Create a new VM and install Debian in it, this is a typical installation, there are no special steps here.
+#. Create a new VM and install Debian in it, this is a typical installation, there are no special steps here, however:
+
+	- you need to make sure you have plenty of free space, because the kernel building process will consume a lot of space
+	- TODO determine if 64-bit targets will work or not
+
 #. Configure the VM to have a serial port
 
 	- set ``Port mode`` = ``Host pipe``
