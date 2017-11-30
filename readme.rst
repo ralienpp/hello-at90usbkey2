@@ -184,3 +184,68 @@ Other remarks
 =============
 
 - Data on the USBus is transmitted LSB first.
+
+
+
+
+Kernel debugging
+================
+
+This section explains how to attach ``gdb`` to a target system, via a serial port, in order to debug kernel code running on it.
+
+Tested on:
+
+- host = Linux Mint 18.2
+- target = Debian 9
+
+Ingredients
+-----------
+
+- *host* - a Linux machine, with Virtualbox, this is where our debugger is running.
+- *target* - a Linux virtual machine running inside the host, this is the debuggee, i.e. we attach to it with the debugger running on the host.
+
+
+Prerequisites
+-------------
+
+Guest
+~~~~~
+
+Install *Virtualbox guest additions* into the target VM.
+
+#. Start VirtualBox and run the guest
+#. Devices\Insert Guest Additions CD Image
+#. Mount the CD-ROM ``mount /dev/cdrom /media/cdrom``
+#. ``apt-get install dkms build-essential linux-headers-$(uname -r)``
+#. Run ``/media/cdrom/VBoxLinuxAdditions.run``
+
+The next phase is to build the kernel from source. These instructions are derived from the Debian handbook: https://kernel-handbook.alioth.debian.org/ch-common-tasks.html#s-common-official
+
+#. ``apt-get install libncurses5-dev bc``
+#. ``apt-get source linux``
+#. ``apt-get install devscripts``
+#. ``make nconfig``
+#. In ``kernel hacking`` enable these: ``KGDB, debug boot parameters``. Note that building the kernel with debug symbols is also required, but this option is enabled by default in _Compiler settings\compile time checks and compiler options_
+#. Press ``F6`` to save the configuration (leave the default name as ``.config``)
+#. ``make clean``
+#. ``make deb-pkg`` - this initiates the kernel build process, it will take a long time. As a result you'll get a ``.deb`` that can be installed
+
+
+
+Host
+~~~~
+
+#. Install the following packages, e.g. ``sudo apt-get install socat``
+#. Create a new VM and install Debian in it, this is a typical installation, there are no special steps here.
+#. Configure the VM to have a serial port
+
+	- set ``Port mode`` = ``Host pipe``
+	- check ``Create pipe``
+	- set the path to ``/tmp/kerneldebug`` (or whatever you prefer, as long as you remember it later)
+
+
+
+
+
+
+
