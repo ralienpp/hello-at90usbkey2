@@ -224,11 +224,12 @@ The next phase is to build the kernel from source. These instructions are derive
 #. ``apt-get install libncurses5-dev bc``
 #. ``apt-get source linux``
 #. ``apt-get install devscripts``
+#. ``make localyesconfig`` and use the default settings by pressing Enter, if prompted. This ensures that you build the kernel only with the modules that are actually used by your system (thus minimizing build time)
 #. ``make nconfig``
 #. In ``kernel hacking`` enable these: ``KGDB, debug boot parameters``. Note that building the kernel with debug symbols is also required, but this option is enabled by default in *Compiler settings\compile time checks and compiler options*
 #. Press ``F6`` to save the configuration (leave the default name as ``.config``)
 #. ``make clean``
-#. ``make deb-pkg`` - this initiates the kernel build process, it will take a long time. As a result you'll get a ``.deb`` that can be installed
+#. ``make -j8 deb-pkg`` - this initiates the kernel build process, it will take a long time. As a result you'll get a ``.deb`` that can be installed. Note the ``-j8`` parameter, it indicates that the build process is done by 8 processes in parallel, adjust this as you see fit, depending on your hardware capabilities (this should speed up the process a bit). The value could be chosen as the number of cores times ``1.5``; you can play with it and see empirically what works best for you.
 
 
 
@@ -238,7 +239,7 @@ Host
 #. Install the following packages, e.g. ``sudo apt-get install socat``
 #. Create a new VM and install Debian in it, this is a typical installation, there are no special steps here, however:
 
-	- you need to make sure you have plenty of free space, because the kernel building process will consume a lot of space
+	- you need to make sure you have plenty of free space, because the kernel building process will consume a lot of space. 25..30 GB should be enough.
 	- TODO determine if 64-bit targets will work or not
 
 #. Configure the VM to have a serial port
