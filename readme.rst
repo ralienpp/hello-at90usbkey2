@@ -287,6 +287,11 @@ You need access to the kernel sources that are inside the VM. An easy way to do 
 
 This will mount the remote file system to a local mount point. Adjust paths and port numbers accordingly (consider using an *SSH config* file to make this easier). Note that you can unmount the volume using ``sudo umount /tmp/kernelsrc``.
 
+.. WARNING::
+	The ``sshfs`` trick doesn't work, because once you attach the debugger to the remote system, it blocks (i.e. doesn't execute anything), thus the ``ssh`` connection that is required to keep ``sshfs`` alive will not work either, hence you will not able to attach to the remote machine. **No warnings or errors will be shown, so keep this in mind.**
+
+	The workaround is to compress or ``tar`` the source directory, copy it outside of the VM, then extract that and use the output directory with ``gdb`` (you'll see that step later). Example:
+
 
 #. Run socat on the host: ``sudo socat -d -d /tmp/kerneldebug pty`` and leave it running in the background. Note that the supplied path, ``/tmp/kerneldebug`` must match the path given in the properties of the virtual machine. Once started, pay attention to the path of the created device file, in the output below it is ``/dev/pts/3``::
 
@@ -299,12 +304,33 @@ This will mount the remote file system to a local mount point. Adjust paths and 
 #. Run ``sudo chmod 666 /dev/pts/3`` to ensure that your user will be able to access this file (you can also take ownership, or run ``gdb`` as root, it is up to you)
 #. Go to ``/tmp/kernelsrc/home/developer/linux-4.9.51`` (adjust the path accordingly)
 #. Start ``gdb ./vmlinux``, it will load debug symbols, it may take a few seconds
-#. Run ``target remote /dev/pts/3`` (substitute the path to the one you got from ``socat`` earlier
 #. On the guest, run as root ``echo "ttyS0,115200" >/sys/module/kgdboc/parameters/kgdboc``
 #. Then run ``echo g > /proc/sysrq-trigger`` to trigger a breakpoint (or press ``Alt-SysRq-g`` if you have that on the keyboard). You will notice that the console says ``KGDB: Entering KGDB``, it is a good sign. Also note that at this stage your CPU will most likely run at 100%.
+#. Run ``target remote /dev/pts/3`` (substitute the path to the one you got from ``socat`` earlier). **NOTE** it is important to run this command only after the target system is in debug mode, otherwise you will see errors such as these::
 
-At this point, you are ready to debug.
+	(gdb) target remote /dev/pts/3
+	Remote debugging using /dev/pts/3
+	Ignoring packet error, continuing...
+	warning: unrecognized item "timeout" in "qSupported" response
+	Ignoring packet error, continuing...
+	Remote replied unexpectedly to 'vMustReplyEmpty': timeout
 
+
+At this point, you are ready to debug. Use whatever ``gdb`` commands you want (or know :-), and press ``c`` to continue execution - this will "unfreeze" the remote machine so the code can run its course. If you want to give control back to ``gdb``, run ``echo g > /proc/sysrq-trigger`` again (or press ``Alt-SysRq-g``, if you have a keyboard). You can switch from debug/continue as many times as you want.
+
+GDB commands
+============
+
+- ``kldstat`` - find the address to which a module was loaded.
+- ``b sys_open`` - set breakpoint on the ``sys_open`` function.
+- ``c`` - continue
+- ``nm gdb1.ko`` list symbols from a specific object file
+
+``lx-dmesg`` doesn't work
+``b my_init`` doesn't work, though I expected it to set a breakpoint when that function is called
+``apropos lx`` - nothing
+
+``(gdb) monitor lsmod`` -> Target does not support this command.
 
 
 
@@ -312,3 +338,4 @@ References
 ==========
 
 - http://opensourceforu.com/2011/03/kgdb-with-virtualbox-debug-live-kernel/
+- http://oboguev.net/kernel-etc/linux-kernel-debugging.htm - various kernel debugging techniques
